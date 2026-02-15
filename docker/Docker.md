@@ -23,3 +23,9 @@ nginx 서버를 시작하기 위해 명령어를 치려 하나, 현재 진행중
 ```shell
 docker run --rm --detach --publish 8090:80 --name web nginx:mainline
 ```
+
+- 도커 이미지
+애플리케이션을 실행하는 데 필요한 모든 것과 메타데이터 등 컨테이너의 각종 설정의 집합체이다.
+도커 이미지는 여러 개의 이미지 레이어를 쌓아 올려 만든다.
+
+- Dockerfile
