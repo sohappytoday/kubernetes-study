@@ -29,4 +29,13 @@ docker run --rm --detach --publish 8090:80 --name web nginx:mainline
 도커 이미지는 여러 개의 이미지 레이어를 쌓아 올려 만든다.
 
 - Dockerfile  
+Dockerfile은 컨테이너 이미지의 설계도이다.
+```Dockerfile
+# 베이스 이미지 선택
+FROM nginx:mainline
 
+# 내 index.html을 컨테이너 안으로 복사
+COPY index.html /usr/share/nginx/html
+```
+
+이렇게 하면 `http://localhost:8090` 접속 시 내 index.html이 뜨게 되는 컨테이너를 실행할 이미지를 생성하게 된다.
