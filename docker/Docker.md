@@ -51,7 +51,6 @@ docker build ./docker/custom-nginx -t nginx-custom:1.0.0
 ```
 
 ### 컨테이너 실행
-
 `--rm` : 컨테이너 종료시 자동 삭제
 `-d` : 백그라운드 실행
 `-p` : Port 포워딩
@@ -60,3 +59,14 @@ docker build ./docker/custom-nginx -t nginx-custom:1.0.0
 # 이미지 실행
 docker run --rm -d -p 8090:80 --name web nginx-custom:1.0.0
 ```
+
+### registry 구축
+private registry를 구축해주었다.
+```shell
+docker run -d -p 5000:5000 -v ./docker/registry:/var/lib/registry --name registry registry:2
+
+docker tag nginx-custom:1.0.0 localhost:5000/nginx-custom:1.0.0
+docker push localhost:5000/nginx-custom:1.0.0
+```
+이미지를 tag 후 registry에 `docker push`를 해주었다.
+
