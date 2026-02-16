@@ -29,3 +29,33 @@
 이를 `Reconciliation Loop(조정 루프)`라고 한다. 덕분에 쿠버네티스는 장애에 강하다.
 
 예시) '컨테이너 A와 컨테이너 B가 실행중이다.'라는 Desired State를 설정해 두면 A가 실행 중이 아니면 실행하게 된다.
+
+### YAML 파일로 각 설정을 관리할 수 있다.(Infrastructure as Code)
+Infrastructure as Code(IaC)는 수동 프로세스가 아닌  
+코드를 사용하여 infrastructure를 관리하고 새 인프라를 만들어서 준비하는 것을 의미한다.  
+
+쿠버네티스에서 `YAML` 파일을 사용하는데 이를 'manifest'라고 부른다.  
+이 menifest 파일에 다양한 인프라 설정을 작성해 두어 설정을 코드화 한다.  
+
+IaC를 사용하게 되면 코드로 인프라를 관리하기 때문에 변경 이력을 추적하기 쉽고 실제 실행해야 될 절차 누락 등이 사라진다.
+다만, 클릭 한 번으로 끝나는 작업도 코드화해야 한다는 번거로움이 있긴 하다.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx:mainline
+      resources:
+        requests:
+          memory: 100Mi
+```
+위 manifest 파일은 컨테이너 이미지로 `nginx:mainline`을 이용하며, 컨테이너에 필요한 최소 메모리 용량이 100Mi라고 명시한다. 
+
+컨테이너는 `Pod`라는 리소스를 사용하여 배포하는데, `Pod`는 여러 개의 컨테이너를 하나로 묶은 단위이다.
+위의 menifest는 Pod라는 리소스를 사용하여 nginx라는 이름의 컨테이너를 실행하도록 작성되었다.  
+
+이처럼 컨테이너의 사양을 모두 manifest에 기록하고, 이 사양을 바탕으로 컨테이너가 실행된다.  
