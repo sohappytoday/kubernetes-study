@@ -39,3 +39,19 @@ COPY index.html /usr/share/nginx/html
 ```
 
 이렇게 하면 `http://localhost:8090` 접속 시 내 index.html이 뜨게 되는 컨테이너를 실행할 이미지를 생성하게 된다.
+```shell
+# 이미지 빌드
+docker build ./docker/custom-nginx -t nginx-custom:1.0.0
+```
+
+
+- 컨테이너 실행
+
+`--rm` : 컨테이너 종료시 자동 삭제
+`-d` : 백그라운드 실행
+`-p` : Port 포워딩
+`--name` : 컨테이너 이름 지정
+```shell
+# 이미지 실행
+docker run --rm -d -p 8090:80 --name web nginx-custom:1.0.0
+```
