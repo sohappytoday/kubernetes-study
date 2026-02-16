@@ -1,5 +1,10 @@
 # Docker
 
+## Index
+- [Container](#Container)
+- [도커 준비 환경](#도커-준비-환경)
+
+---
 ## Container
 컨테이너란 OS 위에 만들어지는 '격리'된 가상 환경
 
@@ -18,17 +23,18 @@ VM은 Hypervisor 위에 OS까지 가상화하여 격리한다.
 ### What is Docker?
 도커는 컨테이너 기술을 이용해 어디서든(macOS, Windows, Ubuntu 등) 동일한 환경을 만들 수 있게 해준다.
 
-### 도커 준비 환경
+---
+## 도커 준비 환경
 nginx 서버를 시작하기 위해 명령어를 치려 하나, 현재 진행중인 프로젝트가 있어 8090포트로 맞춰두었다.
 ```shell
 docker run --rm --detach --publish 8090:80 --name web nginx:mainline
 ```
 
-- 도커 이미지  
+### 도커 이미지  
 애플리케이션을 실행하는 데 필요한 모든 것과 메타데이터 등 컨테이너의 각종 설정의 집합체이다.
 도커 이미지는 여러 개의 이미지 레이어를 쌓아 올려 만든다.
 
-- Dockerfile  
+### Dockerfile  
 Dockerfile은 컨테이너 이미지의 설계도이다.
 ```Dockerfile
 # 베이스 이미지 선택
@@ -44,8 +50,7 @@ COPY index.html /usr/share/nginx/html
 docker build ./docker/custom-nginx -t nginx-custom:1.0.0
 ```
 
-
-- 컨테이너 실행
+### 컨테이너 실행
 
 `--rm` : 컨테이너 종료시 자동 삭제
 `-d` : 백그라운드 실행
